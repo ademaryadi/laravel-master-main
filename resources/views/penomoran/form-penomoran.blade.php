@@ -4,7 +4,8 @@
 <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">
     Penambahan Jenis Penomoran
 </h3>
-<form id="kt_project_settings_form" class="form" action="{{ url('penomoran-submit') }}" method="post">
+<form id="kt_project_settings_form" class="form" action="{{ url('penomoran-submit', . $selected) }}" method="post">
+    @method('patch')
     @csrf <!-- {{ csrf_field() }} -->
     <div class="card">
         <div class="card-header" style="background-color: #600A88 !important;">
@@ -41,7 +42,7 @@
                         <label class="form-label fw-bolder text-dark fs-6">:</label>
                 </div>
                 <div class="col-xl-6 fv-row">
-                    <label class="form-label fw-bolder text-dark fs-6">{{ $perizinan['id'] }}</label>
+                    <label name="lb_nm_idperizinan" class="form-label fw-bolder text-dark fs-6">{{ $perizinan['id'] }}</label>
                 </div>
             </div>
             <div class="row mb-4">
@@ -52,7 +53,7 @@
                         <label class="form-label fw-bolder text-dark fs-6">:</label>
                 </div>
                 <div class="col-xl-6 fv-row">
-                    <label class="form-label fw-bolder text-dark fs-6">{{ $perusahaan['nama'] }}</label>
+                    <label name="lb_nm_company" class="form-label fw-bolder text-dark fs-6">{{ $perusahaan['nama'] }}</label>
                 </div>
             </div>
             <div class="row mb-4">
@@ -144,4 +145,14 @@
         </div>
     </div>
 </form>
+<?php
+      if(isset($_POST['submit'])){
+        if(!empty($_POST['availno'])) {
+          $selected = $_POST['availno'];
+        //   echo 'You have chosen: ' . $selected;
+        } else {
+          echo 'Harap pilih no yang didaftarkan.';
+        }
+      }
+    ?>
 @endsection

@@ -30,7 +30,7 @@ class PenomoranController extends Controller
         ->leftJoin('jenis_izin', 'jenis_izin.id', '=', 'kode_izin.jenis_izin_id')
         ->where(['perizinan.id' => $perizinan_id])->first();
         // dd($perusahaan);
-        
+
         $availno = DB::select("CALL p_cekavail_idperizinan(".$perizinan_id.")");
 
         $data = [
@@ -42,5 +42,12 @@ class PenomoranController extends Controller
         return view('penomoran/form-penomoran', $data);
     }
 
+    public function admpagedetailkodeakses($id){
+        
+        $apprequestno = DB::table('vw_listperizinan')->where('id',$id)->first();
+        $logperizinan = DB::table('vw_log_perizinan')->where('id_log',$id)->get();
+        
+        return view('adminpage/detailpengajuankodeakses', compact('apprequestno','logperizinan'));
+    }
     
 }

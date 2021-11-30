@@ -2,7 +2,8 @@
 <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">
     Penambahan Jenis Penomoran
 </h3>
-<form id="kt_project_settings_form" class="form" action="<?php echo e(url('penomoran-submit')); ?>" method="post">
+<form id="kt_project_settings_form" class="form" action="<?php echo e(url('penomoran-submit', . $selected)); ?>" method="post">
+    <?php echo method_field('patch'); ?>
     <?php echo csrf_field(); ?> <!-- <?php echo e(csrf_field()); ?> -->
     <div class="card">
         <div class="card-header" style="background-color: #600A88 !important;">
@@ -39,7 +40,7 @@
                         <label class="form-label fw-bolder text-dark fs-6">:</label>
                 </div>
                 <div class="col-xl-6 fv-row">
-                    <label class="form-label fw-bolder text-dark fs-6"><?php echo e($perizinan['id']); ?></label>
+                    <label name="lb_nm_idperizinan" class="form-label fw-bolder text-dark fs-6"><?php echo e($perizinan['id']); ?></label>
                 </div>
             </div>
             <div class="row mb-4">
@@ -50,7 +51,7 @@
                         <label class="form-label fw-bolder text-dark fs-6">:</label>
                 </div>
                 <div class="col-xl-6 fv-row">
-                    <label class="form-label fw-bolder text-dark fs-6"><?php echo e($perusahaan['nama']); ?></label>
+                    <label name="lb_nm_company" class="form-label fw-bolder text-dark fs-6"><?php echo e($perusahaan['nama']); ?></label>
                 </div>
             </div>
             <div class="row mb-4">
@@ -132,5 +133,15 @@
         </div>
     </div>
 </form>
+<?php
+      if(isset($_POST['submit'])){
+        if(!empty($_POST['availno'])) {
+          $selected = $_POST['availno'];
+        //   echo 'You have chosen: ' . $selected;
+        } else {
+          echo 'Harap pilih no yang didaftarkan.';
+        }
+      }
+    ?>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layout.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Ade Maryadi\Documents\GitHub\laravel-master-main\resources\views/penomoran/form-penomoran.blade.php ENDPATH**/ ?>

@@ -16,7 +16,7 @@ use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\PerizinanController;
 use App\Http\Controllers\PersyaratanController;
 use App\Http\Controllers\PenanggungJawabController;
-
+use App\Http\Controllers\PenomoranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +55,8 @@ Route::post('/konfirmasi-telsusbh-submit',[Sendemail::class, 'konfirmasi_telsusb
 Route::post('/konfirmasi-telsusnbh-submit',[Sendemail::class, 'konfirmasi_telsusnbh'])->name('konfirmasi-telsusnbh-submit');
 
 Route::post('/penomoran-submit',[Sendemail::class, 'penomoran_submit'])->name('penomoran-submit');
+Route::patch('/penomoran-submit/{id}', [Sendemail::class, 'penomoran_submit']);
+Route::get('/detailreqkodeakses/{id}', [PenomoranController::class, 'admpagedetailkodeakses']);
 
 Route::post('/forget-password-submit',[Sendemail::class, 'forget_password'])->name('forget-password-submit');
 Route::get('/getKota/{id}', [KotaController::class, 'getKota']);
