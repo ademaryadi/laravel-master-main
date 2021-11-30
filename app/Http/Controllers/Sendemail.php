@@ -91,15 +91,13 @@ class Sendemail extends BaseController
         return redirect('/konfirmasi-msg');
     }
 
-    public function penomoran_submit(Request $request){
-    	// $to_name = $request->input('name');
-        // $to_email = $request->input('email');
-        // $data = array('name'=>$to_name, "email" => $to_email);
-        // Mail::send('emails.konfirmasi', $data, function($message) use ($to_name, $to_email) {
-        //     $message->to($to_email, $to_name)
-        //     ->subject('Pengajuan Pemenuhan Persyaratan');
-        //     $message->from('devtesting.ryan@gmail.com','Siap - Kominfo');
-        // });
+    public function penomoran_submit(Request $request, $id){
+    	DB::table("tb_trx_penomoran")->where('id', $id)
+            ->update([
+                'is_used' => 1,
+                'used_for' => $request -> lb_nm_company,
+                'id_perizinan' => $request -> lb_nm_idperizinan
+            ]);
         return redirect('/penomoran-msg');
     }
 
